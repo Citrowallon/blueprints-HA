@@ -126,7 +126,7 @@ blueprint:
           max: 5000.0
           step: 10.0
           mode: slider
-  source_url: https://github.com/damru/ha-blueprints/blob/main/ikea_E2201-E2213_ZHA-Z2M_control-anything.yaml
+  source_url: https://github.com/Citrowallon/blueprints-HA/edit/main/e1812.yaml
 mode: single
 max_exceeded: silent
 triggers:
