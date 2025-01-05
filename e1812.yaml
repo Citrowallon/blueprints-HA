@@ -3,8 +3,8 @@ blueprint:
     min_version: 2024.12.0
   author: Citrowallon
   domain: automation
-  name: IKEA Shortcut Button (E1812) Controls (Z2M)
-  description: "## Control anything with **Shortcut Button (E1812)** remotes\n\nOnly for use with Zigbee2MQTT ##"
+  name: IKEA Shortcut Button (E1812) Control
+  description: "## Control anything with **Shortcut Button (E1812)** remote\n\nOnly for use with Zigbee2MQTT ##"
   input:
     remote_device:
       name: Remote
