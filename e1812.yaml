@@ -15,6 +15,10 @@ blueprint:
             manufacturer: IKEA
             model: TRADFRI shortcut button (E1812)
           multiple: false
+    base_topic:
+      name: (Zigbee2MQTT) Base mqtt topic
+      description: The topic configured in [Z2M addon](https://www.zigbee2mqtt.io/guide/usage/mqtt_topics_and_messages.html).
+      default: zigbee2mqtt
     single:
       name: Action when On sended
       description: Action to run when SHORT press
@@ -41,16 +45,18 @@ blueprint:
         action: {}
 mode: restart
 max_exceeded: silent
+trigger_variables:
+  z2m_base_topic: !input base_topic
+  z2m_controller: !input button
 trigger:
 - platform: state
   entity_id:
   - !input button
   to: 'off'
   id: 'off'
-- platform: state
-  entity_id:
-  - !input button
-  to: 'on'
+- platform: mqtt
+  topic: '{{ z2m_base_topic ~ ''/'' ~ z2m_controller ~ ''/action'' }}'
+  payload: 'on'
   id: 'on'
 - platform: state
   entity_id:
