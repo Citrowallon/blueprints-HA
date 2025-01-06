@@ -1,0 +1,82 @@
+blueprint:
+  name: Z2M IKEA Shortcut Button E1812
+  description: Blueprint for Ikea Tradfri Shortcut Button E1812. You can put several
+    actions to each single press, double press and long press.
+  domain: automation
+  source_url: https://community.home-assistant.io/t/z2m-ikea-tradfri-shortcut-button-e1812-universal-actions/522409/3
+  input:
+    button:
+      name: Remote
+      description: IKEA Shortcut Button to use (e.g sensor.kitchen_remote_action)
+      selector:
+        entity:
+          integration: mqtt
+          domain:
+          - sensor
+          multiple: false
+    single:
+      name: Action when On sended
+      description: Action to run when SHORT press
+      default: []
+      selector:
+        action: {}
+    double:
+      name: Action when Off sended
+      description: Action to run when DOUBLE SHORT press
+      default: []
+      selector:
+        action: {}
+    long:
+      name: Action when Brightness_move_up sended
+      description: Action to run when LONG press
+      default: []
+      selector:
+        action: {}
+    released:
+      name: Action when Brightness_stop sended
+      description: Action to run when LONG press RELEASED
+      default: []
+      selector:
+        action: {}
+mode: restart
+max_exceeded: silent
+trigger:
+- platform: state
+  entity_id:
+  - !input button
+  to: 'off'
+  id: 'off'
+- platform: state
+  entity_id:
+  - !input button
+  to: 'on'
+  id: 'on'
+- platform: state
+  entity_id:
+  - !input button
+  to: brightness_move_up
+  id: long_down
+- platform: state
+  entity_id:
+  - !input button
+  to: brightness_stop
+  id: stop
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: trigger
+      id: 'off'
+    sequence: !input double
+  - conditions:
+    - condition: trigger
+      id: 'on'
+    sequence: !input single
+  - conditions:
+    - condition: trigger
+      id: long_down
+    sequence: !input long
+  - conditions:
+    - condition: trigger
+      id: stop
+    sequence: !input released
