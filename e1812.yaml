@@ -3,7 +3,7 @@ blueprint:
   description: Blueprint for Ikea Tradfri Shortcut Button E1812. You can put several
     actions to each single press, double press and long press.
   domain: automation
-  source_url: https://community.home-assistant.io/t/z2m-ikea-tradfri-shortcut-button-e1812-universal-actions/522409/3
+  source_url: https://github.com/Citrowallon/blueprints-HA/blob/main/e1812.yaml
   input:
     button:
       name: Remote
