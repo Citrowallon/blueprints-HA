@@ -9,10 +9,11 @@ blueprint:
       name: Remote
       description: IKEA Shortcut Button to use (e.g sensor.kitchen_remote_action)
       selector:
-        entity:
-          integration: mqtt
-          domain:
-          - sensor
+        device:
+          filter:
+          - integration: mqtt
+            manufacturer: IKEA
+            model: TRADFRI shortcut button (E1812)
           multiple: false
     single:
       name: Action when On sended
