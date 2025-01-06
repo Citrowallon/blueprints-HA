@@ -1,7 +1,7 @@
 blueprint:
-  name: Z2M IKEA Shortcut Button E1812
+  name: Z2M IKEA Shortcut Button E1812 
   description: Blueprint for Ikea Tradfri Shortcut Button E1812. You can put several
-    actions to each single press, double press and long press.
+    actions to each single press, double press and long press. Improvement of the original blueprint to avoid *_action entities
   domain: automation
   source_url: https://github.com/Citrowallon/blueprints-HA/blob/main/e1812.yaml
   input:
