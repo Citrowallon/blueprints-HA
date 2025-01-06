@@ -41,9 +41,6 @@ blueprint:
         action: {}
 mode: restart
 max_exceeded: silent
-trigger_variables:
-  z2m_base_topic: !input base_topic
-  z2m_controller: !input button
 trigger:
 - platform: mqtt
   device_id: !input button
