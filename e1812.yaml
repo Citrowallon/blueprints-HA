@@ -6,7 +6,7 @@ blueprint:
   name: IKEA Shortcut Button (E1812) Control
   description: "## Control anything with **Shortcut Button (E1812)** remote\n\nOnly for use with Zigbee2MQTT ##"
   input:
-    remote_device:
+    button:
       name: Remote
       description: 'IKEA remote (Somrig, Rodret) to use.'
       default: []
