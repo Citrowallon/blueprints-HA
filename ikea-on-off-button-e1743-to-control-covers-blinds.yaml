@@ -76,7 +76,7 @@ action:
       target: !input cover
   - conditions:
     - condition: trigger
-      id: 'move_down
+      id: 'move_down'
     sequence:
     - service: cover.close_cover
       data: {}
