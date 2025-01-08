@@ -7,9 +7,11 @@ blueprint:
       name: button
       description: Ikea ON/OFF Button (E1743)
       selector:
-        entity:
-          domain:
-          - sensor
+        device:
+          filter:
+          - integration: mqtt
+            manufacturer: IKEA
+            model: RODRET wireless dimmer/power switch (E2201)
           multiple: false
     cover:
       name: Cover
@@ -19,13 +21,14 @@ blueprint:
           entity:
           - domain:
             - cover
-  source_url: https://community.home-assistant.io/t/ikea-on-off-button-e1743-to-control-covers-blinds/286307
+  source_url: https://github.com/Citrowallon/blueprints-HA/blob/main/ikea-on-off-button-e1743-to-control-covers-blinds.yaml
 mode: restart
 max_exceeded: silent
 trigger:
-- platform: state
-  entity_id: !input button
-  attribute: action
+- platform: device
+  domain: mqtt
+  device_id: !input button
+  type: action
 variables:
   command: '{{ trigger.to_state.state }}'
 condition:
