@@ -1,11 +1,11 @@
 blueprint:
   name: Ikea on/off button (E1743) cover control
-  description: Control cover with IKEA Tradfri ON/OFF button (E1743).
+  description: Control cover with IKEA Tradfri ON/OFF button (E1743) or IKEA Rodret (E2201).
   domain: automation
   input:
     button:
       name: button
-      description: Ikea ON/OFF Button (E1743)
+      description: Ikea ON/OFF Button (E1743) or IKEA Rodret (E2201)
       selector:
         device:
           filter:
