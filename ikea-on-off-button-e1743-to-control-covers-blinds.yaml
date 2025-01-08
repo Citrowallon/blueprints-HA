@@ -1,6 +1,6 @@
 blueprint:
-  name: Ikea on/off button (E1743) cover control
-  description: Control cover with IKEA Tradfri ON/OFF button (E1743) or IKEA Rodret (E2201).
+  name: Ikea on/off button (E1743) and IKEA Rodret (E2201) cover control 
+  description: Control cover with IKEA Tradfri ON/OFF button (E1743) or IKEA Rodret (E2201). 
   domain: automation
   input:
     button:
@@ -28,43 +28,69 @@ blueprint:
 mode: restart
 max_exceeded: silent
 trigger:
-- platform: device
+- trigger: device
   domain: mqtt
   device_id: !input button
   type: action
-variables:
-  command: '{{ trigger.to_state.state }}'
-condition:
-- condition: template
-  value_template: '{{ command != ''''}}'
+  subtype: 'off'
+  id: 'off'
+- trigger: device
+  domain: mqtt
+  device_id: !input button
+  type: action
+  subtype: 'on'
+  id: 'on'
+- trigger: device
+  domain: mqtt
+  device_id: !input button
+  type: action
+  subtype: brightness_move_up
+  id: move_up
+- trigger: device
+  domain: mqtt
+  device_id: !input button
+  type: action
+  subtype: brightness_move_down
+  id: move_down
+- trigger: device
+  domain: mqtt
+  device_id: !input button
+  type: action
+  subtype: brightness_stop
+  id: stop
 action:
 - choose:
   - conditions:
-    - '{{ command == ''off'' }}'
+    - condition: trigger
+      id: 'off'
     sequence:
     - service: cover.close_cover
       target: !input cover
       data: {}
   - conditions:
-    - '{{ command == ''on'' }}'
+    - condition: trigger
+      id: 'on'
     sequence:
     - service: cover.open_cover
       data: {}
       target: !input cover
   - conditions:
-    - '{{ command == ''brightness_move_down'' }}'
+    - condition: trigger
+      id: 'move_down
     sequence:
     - service: cover.close_cover
       data: {}
       target: !input cover
   - conditions:
-    - '{{ command == ''brightness_move_up'' }}'
+    - condition: trigger
+      id: 'move_up'
     sequence:
     - service: cover.open_cover
       data: {}
       target: !input cover
   - conditions:
-    - '{{ command == ''brightness_stop'' }}'
+    - condition: trigger
+      id: 'stop'
     sequence:
     - service: cover.stop_cover
       data: {}
